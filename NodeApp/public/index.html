@@ -32,7 +32,7 @@
                 <form>
                     <div class="col-sm-4">
                         Driver Id:
-                        <input type="text" class="form-control" placeholder="Enter Driver ID here" ng-model="formData.driver_id">
+                        <input type="text" class="form-control" placeholder="Enter Driver ID here" ng-model="formData.id">
                     </div>
                     <div class="col-sm-4">
                         Driver Name:
@@ -70,15 +70,15 @@
                 </thead>
                 <tbody ng-model="formData">
                     <tr ng-repeat="data in records">
-                        <td>{{ data.driver_id }}</td>
+                        <td>{{ data.id }}</td>
                         <td>{{ data.driver_name }}</td>
                         <td>{{ data.driver_licence_no }}</td>
                         <td>{{ data.driver_mobile_no }}</td>
                         <td>{{ data.driver_address }}</td>
                         <td>
                             <div class="btn-group btn-group-xs">
-                                <button type="button" class="btn btn-default" ng-click="updateRecord('driver_info',data.driver_id,data)"><!--span class="glyphicon glyphicon-pencil"></span--> Edit</button> <!--// hot coded DriverInfo Tabnle Name --> 
-                                <button type="button" class="btn btn-danger" ng-click="deleteRecord('driver_info',data.driver_id)"><!--span class="glyphicon glyphicon-trash"></span--> Trash</button>                                
+                                <button type="button" class="btn btn-default" ng-click="updateRecord('driver_info',data.id,data)"><!--span class="glyphicon glyphicon-pencil"></span--> Edit</button> <!--// hot coded DriverInfo Tabnle Name --> 
+                                <button type="button" class="btn btn-danger" ng-click="deleteRecord('driver_info',data.id)"><!--span class="glyphicon glyphicon-trash"></span--> Trash</button>                                
                             </div>
                         </td>
                     </tr>

@@ -87,11 +87,15 @@
     app.delete('/api/:tablename/:id', function(req, res) {
         var id = req.params.id;
         var tablename = req.params.tablename;
+        console.log("Table Name:"+tablename+"Id:"+ id)
         //req.getConnection(function(err, connection) {
         connection.query("DELETE FROM "+tablename+"  WHERE id = ? ", [id], function(err, rows) {
             if (err)
                 console.log("Error deleting : %s ", err);
-           // else
+           else{
+               console.log("Record Deleted Successfully");
+                res.send("SUCCESS");
+           }
                 //res.redirect("/api/"+tablename);
         });
         //});

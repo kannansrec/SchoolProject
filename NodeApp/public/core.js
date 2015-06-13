@@ -1,6 +1,6 @@
 var app = angular.module('myapp', []);
 app.controller('myctrl',function($scope, $http) {
-        $scope.formData = { driver_id:'DRV1234' + new Date().getSeconds(), driver_name: 'testData', driver_licence_no : '21312' , driver_mobile_no : '123', driver_address:'asdas'};
+        $scope.formData = { id:'DRV1234' + new Date().getSeconds(), driver_name: 'testData', driver_licence_no : '21312' , driver_mobile_no : '123', driver_address:'asdas'};
         // when landing on the page, get all todos and show them
     
     $http.get('/api/driver_info')
@@ -40,7 +40,7 @@ app.controller('myctrl',function($scope, $http) {
         $scope.deleteRecord = function(tablename, id) {
             $http.delete('/api/'+tablename+'/'+ id)
                 .success(function(data) {
-                    $scope.records = data;
+                   // $scope.records = data;
                     $scope.getRecords(tablename);
                 })
                 .error(function(data) {
