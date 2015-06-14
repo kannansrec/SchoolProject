@@ -9,7 +9,7 @@ app.controller('myctrl',function($scope, $http) {
         tablename=tablename.value;
       
         // when the page is loaded, invoke this to display data
-   alert("tablename: "+tablename);
+//   alert("tablename: "+tablename);
     $http.get('/api/'+tablename)
             .success(function(data) {
                 $scope.records = data;
