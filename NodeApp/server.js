@@ -9,14 +9,14 @@
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: 'support',
+        password: 'root',
         database: 'transport'
     });
     connection.connect(function(err) {
         if (!err) {
             console.log("Database is connected ... \n\n");
         } else {
-            console.log("Error connecting database ... \n\n");
+            console.log("Error connecting to the database :"+err+" \n\n");
         }
     })
     app.use(express.static('public'));
@@ -34,8 +34,10 @@
     // routes ======================================================================
     // api ---------------------------------------------------------------------
     // get all todos
+    
     app.get("/api/:tablename", function(req, res) {
-        console.log("Table Requested was:"+req.params.tablename);
+        console.log("Table Requested using 'GET' was:"+req.params.tablename);
+        console.log("and nmber of params received:"+req.params.length);
         var tablename = req.params.tablename;
         var strQuery = "select * from "+tablename;
         connection.query(strQuery, function(err, rows, fields) {
