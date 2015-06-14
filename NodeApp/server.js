@@ -34,8 +34,10 @@
     // routes ======================================================================
     // api ---------------------------------------------------------------------
     // get all todos
+    
     app.get("/api/:tablename", function(req, res) {
-        console.log("Table Requested was:"+req.params.tablename);
+        console.log("Table Requested using 'GET' was:"+req.params.tablename);
+        console.log("and nmber of params received:"+req.params.length);
         var tablename = req.params.tablename;
         var strQuery = "select * from "+tablename;
         connection.query(strQuery, function(err, rows, fields) {

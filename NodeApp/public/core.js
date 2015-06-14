@@ -9,7 +9,7 @@ app.controller('myctrl',function($scope, $http) {
         tablename=tablename.value;
       
         // when the page is loaded, invoke this to display data
-//   alert("tablename: "+tablename);
+
     $http.get('/api/'+tablename)
             .success(function(data) {
                 $scope.records = data;
@@ -65,15 +65,17 @@ app.controller('myctrl',function($scope, $http) {
         // Update a todo after checking it
         $scope.updateRecord = function(tablename,id,id_data) {
             $scope.formData = id_data;
-            $http.post('/api/'+tablename+'/' + id ,$scope.formData)
-                .success(function(data) {
-                    $scope.records = data;
-                })
-                .error(function(data) {
-                    console.log('Error: ' + data);
-                });
+            alert("tablename:"+tablename+", id: "+id+"id_data:"+id_data.value);
+//            $http.post('/api/'+tablename+'/' + id ,$scope.formData)
+//                .success(function(data) {
+//                    $scope.records = data;
+//                })
+//                .error(function(data) {
+//                    console.log('Error: ' + data);
+//                });
         };
 
-    });
+    
+        });
     
     

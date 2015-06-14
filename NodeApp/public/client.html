@@ -123,11 +123,9 @@ and is marked as "not pending".-->
 <!--    	<button type="button" class="btn btn-default" ng-click="addRecord('trip_details',data.id,data)" ><span class="glyphicon glyphicon-plus"></span> Add new Entry</button>-->
             
             
-            
-            
-    </div><!-- /.container -->
-    <div class="container"><!-- modal container -->
-  <!-- Trigger the modal with a button -->
+ <!---------------------------------------------------------->
+ 
+   <!-- Trigger the modal with a button -->
   <button type="button" class="btn btn-default" data-toggle="modal" data-target="#addNewRecordPopup"><span class="glyphicon glyphicon-plus"></span> Add new Entry</button></button>
 
   <!-- Modal -->
@@ -137,7 +135,7 @@ and is marked as "not pending".-->
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
+<!--          <button type="button" class="close" data-dismiss="modal">&times;</button>-->
           <h4 class="modal-title">Add new Entry</h4>
         </div>
         <div class="modal-body">
@@ -186,7 +184,7 @@ and is marked as "not pending".-->
 <div class="form-group">
   <label class="col-md-4 control-label" for="out_time">Out time</label>  
   <div class="col-md-4">
-  <input id="out_time" name="out_time" type="datetime" placeholder="" class="form-control input-md" required>
+  <input id="out_time" name="out_time" type="datetime-local" placeholder="" class="form-control input-md" required>
     
   </div>
 </div>
@@ -217,8 +215,12 @@ and is marked as "not pending".-->
       
     </div>
   </div>
-  
-</div>
+     
+            
+    </div><!-- /.container -->
+   <!-- <div class="container"><!-- modal container -->
+
+<!--</div>-->
     
   </body>
 </html>
