@@ -9,16 +9,17 @@
     var connection = mysql.createConnection({
         host: 'localhost',
         user: 'root',
-        password: 'root',
+        password: 'support',
         database: 'transport'
     });
     connection.connect(function(err) {
         if (!err) {
             console.log("Database is connected ... \n\n");
         } else {
-            console.log("Error connecting to the database :"+err+" \n\n");
+            console.log("Error connecting to the database :" + err + " \n\n");
         }
     })
+
     app.use(express.static('public'));
     // app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
     app.use(morgan('dev')); // log every request to the console
@@ -34,14 +35,15 @@
     // routes ======================================================================
     // api ---------------------------------------------------------------------
     // get all todos
-    
+
     app.get("/api/:tablename", function(req, res) {
-        console.log("Table Requested using 'GET' was:"+req.params.tablename);
-        console.log("and nmber of params received:"+req.params.length);
+        console.log("Table Requested using 'GET' was:" + req.params.tablename);
+        console.log("and number of params received:" + req.params.length);
         var tablename = req.params.tablename;
-        var strQuery = "select * from "+tablename;
+        var strQuery = "select * from " + tablename;
         connection.query(strQuery, function(err, rows, fields) {
             if (!err) {
+                console.log(rows);
                 res.json(rows);
             } else {
                 res.send(err);
@@ -51,36 +53,55 @@
         });
     });
 
+    // get last trip end KM of the vehicle
+    app.get("/api/:tablename/:vehicle_no", function(req, res) {
+        console.log("Table Requested using 'GET' was:" + req.params.tablename);
+        var tablename = req.params.tablename;
+        var vehicle_no = req.params.vehicle_no;
+        var strQuery = "select end_km from " + tablename +" where vehicle_no="+vehicle_no+" order by id desc limit 1";
+        connection.query(strQuery, function(err, rows, fields) {
+            if (!err) {
+                console.log(rows);
+                res.json(rows);
+            } else {
+                res.send(err);
+                console.log('Error while performing Query.');
+            }
+            //connection.end();
+        });
+    });
+
+
     // Insert a record to DB
     app.post('/api/:tablename', function(req, res) {
         // create a todo, information comes from AJAX request from Angular
         var input = JSON.parse(JSON.stringify(req.body));
         console.log("INput Created" + input);
         var tablename = req.params.tablename;
-        connection.query("INSERT INTO "+tablename+" set ? ", input, function(err, rows) {
+        connection.query("INSERT INTO " + tablename + " set ? ", input, function(err, rows) {
             if (err) {
                 console.log("ERROR MSG:" + err);
                 res.send("Error Occured :" + err);
             } else {
                 console.log("Insert Success :");
-                res.redirect("/api/"+tablename);
+                res.redirect("/api/" + tablename);
             }
         });
     });
 
     //Update a record in DB
     app.post('/api/:tablename/:id', function(req, res) {
-     // create a todo, information comes from AJAX request from Angular
+        // create a todo, information comes from AJAX request from Angular
         var id = req.params.id;
         var tablename = req.params.tablename;
         var input = JSON.parse(JSON.stringify(req.body));
-        connection.query("UPDATE "+tablename+" set ? WHERE id = ? ",[input,id], function(err, rows){
+        connection.query("UPDATE " + tablename + " set ? WHERE id = ? ", [input, id], function(err, rows) {
             if (err) {
                 console.log("ERROR MSG:" + err);
                 res.send("Error Occured :" + err);
             } else {
                 console.log("Update Success :");
-                res.redirect("/api/"+tablename);
+                res.redirect("/api/" + tablename);
             }
         });
     });
@@ -89,16 +110,16 @@
     app.delete('/api/:tablename/:id', function(req, res) {
         var id = req.params.id;
         var tablename = req.params.tablename;
-        console.log("Table Name:"+tablename+"Id:"+ id)
+        console.log("Table Name:" + tablename + "Id:" + id)
         //req.getConnection(function(err, connection) {
-        connection.query("DELETE FROM "+tablename+"  WHERE id = ? ", [id], function(err, rows) {
+        connection.query("DELETE FROM " + tablename + "  WHERE id = ? ", [id], function(err, rows) {
             if (err)
                 console.log("Error deleting : %s ", err);
-           else{
-               console.log("Record Deleted Successfully");
+            else {
+                console.log("Record Deleted Successfully");
                 res.send("SUCCESS");
-           }
-                //res.redirect("/api/"+tablename);
+            }
+            //res.redirect("/api/"+tablename);
         });
         //});
     });

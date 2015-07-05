@@ -1,0 +1,135 @@
+<html lang="en-US">
+<title>School.in</title>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript" src="js/libs/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    
+    <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"-->
+    <!--link rel="stylesheet" href="css/main.css"-->
+    <!--link rel="stylesheet" href="css/semantic.css"/-->
+    <!--script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script-->
+   
+    <script type="text/javascript" src="js/libs/angular/angular.js"></script>
+    <script type="text/javascript" src="js/libs/angular/angular-route.js"></script>
+    <script type="text/javascript" src="js/libs/angular/angular-resource.js"></script>
+     <script type="text/javascript" src="core.js"></script>
+</head>
+
+<body ng-app="myapp">
+    <div class="container" ng-controller="myctrl">
+        <div class="row jumbotron">
+            Organization Name
+        </div>
+  
+        <div class="row page-header">
+            Application Name
+        </div>
+        <div class="row">No of Drivers :
+            <input type="text" value={{records.length}}>
+        </div>
+        <div class="row">
+            <div class="col-sm-12  form-group">
+                <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                <form>
+                    <div class="col-sm-4">
+                        Driver Id:
+                        <input type="text" class="form-control" placeholder="Enter Driver ID here" ng-model="formData.id">
+                    </div>
+                    <div class="col-sm-4">
+                        Driver Name:
+                        <input type="text" class="form-control" placeholder="Enter Driver Name here" ng-model="formData.driver_name">
+                    </div>
+                    <div class="col-sm-4">
+                        Driver Address:
+                        <input type="text" class="form-control" placeholder="Enter Address Address" ng-model="formData.driver_address">
+                    </div>
+                    <div class="col-sm-4">
+                        Driver License Number:
+                        <input type="text" class="form-control" placeholder="Enter License Number" ng-model="formData.driver_licence_no">
+                    </div>
+                    <div class="col-sm-4">
+                        Driver Mobile Number:
+                        <input type="text" class="form-control" placeholder="Enter Mobile Number" ng-model="formData.driver_mobile_no">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <button class="btn btn-primary">New Driver</button>
+        <!--input type="button"  class="btn btn-primary"  value="save" ng-click="createDriver()" /-->
+        <button class="btn btn-primary" ng-click="createRecord('driver_info')">save</button>
+        <div>
+            <p>Driver List</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Driver ID</th>
+                        <th>Driver Name</th>
+                        <th>License No</th>
+                        <th>Mobile No</th>
+                        <th>Address</th>
+                    </tr>
+                </thead>
+                <tbody ng-model="formData">
+                    <tr ng-repeat="data in records">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.driver_name }}</td>
+                        <td>{{ data.driver_licence_no }}</td>
+                        <td>{{ data.driver_mobile_no }}</td>
+                        <td>{{ data.driver_address }}</td>
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                <button type="button" class="btn btn-default" ng-click="updateRecord('driver_info',data.id,data)"><!--span class="glyphicon glyphicon-pencil"></span--> Edit</button> <!--// hot coded DriverInfo Tabnle Name --> 
+                                <button type="button" class="btn btn-danger" ng-click="deleteRecord('driver_info',data.id)"><!--span class="glyphicon glyphicon-trash"></span--> Trash</button>                                
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    
+    
+    
+    
+       
+    
+    <div class="well well-large">
+       <!-- modal for add record pop up-->
+    <div id="form-content" class="modal hide fade in" style="display: none;">
+    <div class="modal-header">
+        <a class="close" data-dismiss="modal">×</a>
+        <h3>Send me a message</h3>
+    </div>
+    <div class="modal-body">
+        <form class="contact" name="contact">
+            <label class="label" for="name">Your Name</label><br>
+            <input type="text" name="name" class="input-xlarge"><br>
+            <label class="label" for="email">Your E-mail</label><br>
+            <input type="email" name="email" class="input-xlarge"><br>
+            <label class="label" for="message">Enter a Message</label><br>
+            <textarea name="message" class="input-xlarge"></textarea>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <input class="btn btn-success" type="submit" value="Send!" id="submit">
+        <a href="#" class="btn" data-dismiss="modal">Nah.</a>
+    </div>
+</div>
+    
+<!--    end add record modal-->
+    
+    
+  <div id="thanks"><p><a data-toggle="modal" href="#form-content" class="btn btn-primary btn-large">Modal powers, activate!</a></p></div>
+    </div>
+    </div>
+</body>
+
+</html>
+
+
+
+
+

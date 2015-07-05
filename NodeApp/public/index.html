@@ -4,31 +4,191 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.css">
+    <!--link rel="stylesheet" href="../css/ngDialog.css">
+    <link rel="stylesheet" href="../css/ngDialog-theme-default.css">
+    <link rel="stylesheet" href="../css/ngDialog-theme-plain.css"-->
+
     <!--link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"-->
     <!--link rel="stylesheet" href="css/main.css"-->
     <!--link rel="stylesheet" href="css/semantic.css"/-->
-    <!--script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script-->
-   
     <script type="text/javascript" src="js/libs/angular/angular.js"></script>
     <script type="text/javascript" src="js/libs/angular/angular-route.js"></script>
     <script type="text/javascript" src="js/libs/angular/angular-resource.js"></script>
-     <script type="text/javascript" src="core.js"></script>
+    <script type="text/javascript" src="js/libs/moment/moment.min.js"></script>
+    <script type="text/javascript" src="js/libs/moment/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="js/libs/moment/de.js"></script>
+    <script type="text/javascript" src="js/libs/angular-ui-bootstrap/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <!--script src="../js/ngDialog.js"></script-->
+    <script type="text/javascript" src="core.js"></script>
+    <!--script type="text/ng-template" id="firstDialogId">
+        <div class = "ngdialog-message" > < h3 > ngDialog template < /h3>
+            <p ng-show="theme">Test content for <code>{{theme}}</code > < /p>
+            <p ng-show="ngDialogData.id">Data passed through directive: <code>{{ngDialogData.foo}}</code > < /p>
+        </div>
+        <div class = "ngdialog-buttons" > 
+        <button type = "button" class = "ngdialog-button ngdialog-button-primary" ng - click = "openSecond()" > Open next </button>
+        </div >
+    </script-->
+
 </head>
 
 <body ng-app="myapp">
     <div class="container" ng-controller="myctrl">
+
         <div class="row jumbotron">
-            Organization Name
+            <div class="col-md-4">
+                <img class="img-responsive" src="img/logo-new.jpg" alt="Chania">
+            </div>
+            <div class="col-md-4">
+                <h>abc Co-operation</h>
+            </div>
+        </div>
+        <div class="row">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div>
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span> 
+                        </button>
+                    </div>
+                    <div id="myNavbar" class="collapse navbar-collapse">
+                        <ul class="nav nav-pills navbar-nav navbar-left">
+                            <li ng-repeat="menu in menudata"><a href="#">{{menu.name}}</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a>
+                            </li>
+                            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!--
+            <ul class="nav nav-pills" role="tablist">
+                <li ng-repeat="menu in menudata">{{menu.name}}</li>
+            </ul>
+-->
         </div>
         <div class="row page-header">
-            Application Name
+            Transport App
+             <button class="btn btn-primary" ng-click="showNewContent()"><span class="glyphicon glyphicon-plus"></span></button>
         </div>
+      
+        <!--
         <div class="row">No of Drivers :
             <input type="text" value={{records.length}}>
         </div>
+-->
+        <div ng-show="showNewDialog">
+            <div class="row form-group">
+                <div class="col-md-4">Vechile No:
+                    <select id="vechile" class="form-control" ng-change="getVehicleEndKM(formData.vehicle_no)" ng-options="data.id as  data.id +'  ('+ data.vehicle_no +')'  for data in vehicles" ng-model="formData.vehicle_no">
+                    </select>
+                </div>
+                <div class="col-md-4">Trip:
+                    <select id="trip" class="form-control" ng-options="data.id as data.trip_name for data in trips" ng-model="formData.trip_name">
+                    </select>
+                </div>
+                <div class="col-md-4">Driver:
+                    <select id="driver" class="form-control" ng-options="data.id as data.driver_name for data in drivers" ng-model="formData.driver_id">
+                    </select>
+                </div>
+                <div class="col-md-4">Start KM :
+                    <input id="startkm" type="text" class="form-control" ng-model="formData.start_km" onkeypress="javascript:return isNumber (event)">
+                </div>
+                <div class="col-md-4">End KM :
+                    <input id="endkm" type="text" class="form-control" ng-model="formData.end_km" onkeypress="javascript:return isNumber (event)">
+                </div>
+                 <div class="col-md-4">Date:
+                    <input id="trip_date" name="TripDate" type="date" class="form-control input-md" ng-model="formData.date">
+                </div>
+                <div class="col-md-4">KM Covered:
+                    <input id="totalkm" type="text" class="form-control" ng-model="formData.total_km" disabled>
+                </div>
+                
+                <div class="col-md-4">
+                    <p>Out Time:</p>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="tempData.outhr" ng-options="data for data in options.hstep"></select>
+                    </div>
+                    <div class="col-md-1">Hr</div>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="tempData.outmin" ng-options="opt for opt in options.mstep"></select>
+                    </div>
+                    <div class="col-md-1">Min</div>
+                </div>
+                 <div ng-hide="hidediv" >
+                    <input type="text" ng-model="formData.leaving_time" value="{{ tempData.outhr + tempData.outmin}}"  >
+                </div>
+                 <div class="col-md-4">
+                    <p>In Time:</p>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="tempData.inhstep" ng-options="data for data in options.hstep"></select>
+                    </div>
+                    <div class="col-md-1">Hr</div>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="tempData.inmstep" ng-options="opt for opt in options.mstep"></select>
+                    </div>
+                    <div class="col-md-1">Min</div>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary" ng-click="createRecord('trip_details')">Save</button>
+                    <button type="button" class="btn btn-danger " ng-click="hideNewContent()">cancel</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p>Trip List</p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Trip ID</th>
+                        <th>Trip Name</th>
+                        <th>Vehicle No</th>
+                        <th>Driver Name</th>
+                        <th>Out Time</th>
+                        <th>In Time</th>
+                        <th>Start KM</th>
+                        <th>End KM</th>
+                        <th>Total KM</th>
+                        <th>Trip time</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody ng-model="formData">
+                    <tr ng-repeat="data in records">
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.trip_name }}</td>
+                        <td>{{ data.vehicle_no }}</td>
+                        <td>{{ data.driver_id }}</td>
+                        <td>{{ data.leaving_time }}</td>
+                        <td>{{ data.entering_time }}</td>
+                        <td>{{ data.start_km }}</td>
+                        <td>{{ data.end_km }}</td>
+                        <td>{{ data.total_km }}</td>
+                        <td>{{ data.trip_time }}</td>
+                        <td>{{ data.date | date: 'dd/MM/yyyy' }}</td>
+                        <td>
+                            <div class="btn-group btn-group-xs">
+                                <button type="button" class="btn btn-default" ng-click="updateRecord('trip_details',data.id,data)">
+                                    <span class="glyphicon glyphicon-pencil"></span>Edit</button>
+                                <button type="button" class="btn btn-danger" ng-click="deleteRecord('trip_details',data.id)">
+                                    <span class="glyphicon glyphicon-trash"></span>Trash</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!--
         <div class="row">
             <div class="col-sm-12  form-group">
-                <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+                <!-- BIND THIS VALUE TO formData.text IN ANGULAR >
                 <form>
                     <div class="col-sm-4">
                         Driver Id:
@@ -53,10 +213,10 @@
                 </form>
             </div>
         </div>
-        <button class="btn btn-primary">New Driver</button>
-        <!--input type="button"  class="btn btn-primary"  value="save" ng-click="createDriver()" /-->
-        <button class="btn btn-primary" ng-click="createRecord('driver_info')">save</button>
+
         <div>
+            <button class="btn btn-primary">New Driver</button>
+            <button class="btn btn-primary" ng-click="createRecord('driver_info')">save</button>
             <p>Driver List</p>
             <table class="table table-striped">
                 <thead>
@@ -77,15 +237,19 @@
                         <td>{{ data.driver_address }}</td>
                         <td>
                             <div class="btn-group btn-group-xs">
-                                <button type="button" class="btn btn-default" ng-click="updateRecord('driver_info',data.id,data)"><!--span class="glyphicon glyphicon-pencil"></span--> Edit</button> <!--// hot coded DriverInfo Tabnle Name --> 
-                                <button type="button" class="btn btn-danger" ng-click="deleteRecord('driver_info',data.id)"><!--span class="glyphicon glyphicon-trash"></span--> Trash</button>                                
+                                <button type="button" class="btn btn-default" ng-click="updateRecord('driver_info',data.id,data)">
+                                    <span class="glyphicon glyphicon-pencil"></span>Edit</button>
+                               
+                                <button type="button" class="btn btn-danger" ng-click="deleteRecord('driver_info',data.id)">
+                                    <span class="glyphicon glyphicon-trash"></span>Trash</button>
+                                <!--button type="button" ng-dialog="firstDialogId" ng-dialog-controller="InsideCtrl" ng-dialog-data="{{data}}" ng-dialog-class="ngdialog-theme-default" ng-dialog-show-close="false">Open via directive</button>
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-
+-->
     </div>
 </body>
 
