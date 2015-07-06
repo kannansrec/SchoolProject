@@ -25,51 +25,81 @@ CREATE TABLE IF NOT EXISTS `driver_info` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table transport.driver_info: ~3 rows (approximately)
+/*!40000 ALTER TABLE `driver_info` DISABLE KEYS */;
+INSERT INTO `driver_info` (`id`, `driver_name`, `driver_address`, `driver_licence_no`, `driver_mobile_no`) VALUES
+	('DRV001', 'Ramu', 'test Address', '12313123123TN', '9998887776'),
+	('DRV002', 'Muthu', 'asdas', '21312', '123'),
+	('DRV003', 'Kumar', 'asdas', '21312', '123');
+/*!40000 ALTER TABLE `driver_info` ENABLE KEYS */;
 
 
 -- Dumping structure for table transport.trips
 CREATE TABLE IF NOT EXISTS `trips` (
   `id` varchar(50) NOT NULL,
+  `trip_name` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table transport.trips: ~3 rows (approximately)
+/*!40000 ALTER TABLE `trips` DISABLE KEYS */;
+INSERT INTO `trips` (`id`, `trip_name`) VALUES
+	('TRIP01', 'TRIP01'),
+	('TRIP02', 'TRIP02'),
+	('TRIP03', 'TRIP03');
+/*!40000 ALTER TABLE `trips` ENABLE KEYS */;
 
 
 -- Dumping structure for table transport.trip_details
 CREATE TABLE IF NOT EXISTS `trip_details` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `trip_name` varchar(50) NOT NULL,
-  `vechile_no` varchar(50) NOT NULL,
+  `vehicle_no` varchar(50) NOT NULL,
   `driver_id` varchar(50) NOT NULL,
   `leaving_time` longtext,
   `status` varchar(50) DEFAULT NULL,
   `entering_time` longtext,
-  `leaving_km` bigint(20) DEFAULT NULL,
-  `entering_km` bigint(20) DEFAULT NULL,
+  `start_km` bigint(20) DEFAULT NULL,
+  `end_km` bigint(20) DEFAULT NULL,
   `total_km` bigint(20) DEFAULT NULL,
   `trip_time` bigint(20) DEFAULT NULL,
+  `date` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_trip_details_driver_info` (`driver_id`),
   KEY `FK_trip_details_trips` (`trip_name`),
-  KEY `FK_trip_details_vechile_details` (`vechile_no`),
+  KEY `FK_trip_details_vehicle_details` (`vehicle_no`),
+  CONSTRAINT `FK_trip_details_driver_info` FOREIGN KEY (`driver_id`) REFERENCES `driver_info` (`id`),
   CONSTRAINT `FK_trip_details_trips` FOREIGN KEY (`trip_name`) REFERENCES `trips` (`id`),
-  CONSTRAINT `FK_trip_details_vechile_details` FOREIGN KEY (`vechile_no`) REFERENCES `vechile_details` (`id`),
-  CONSTRAINT `FK_trip_details_driver_info` FOREIGN KEY (`driver_id`) REFERENCES `driver_info` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  CONSTRAINT `FK_trip_details_vehicle_details` FOREIGN KEY (`vehicle_no`) REFERENCES `vehicle_details` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table transport.trip_details: ~5 rows (approximately)
+/*!40000 ALTER TABLE `trip_details` DISABLE KEYS */;
+INSERT INTO `trip_details` (`id`, `trip_name`, `vehicle_no`, `driver_id`, `leaving_time`, `status`, `entering_time`, `start_km`, `end_km`, `total_km`, `trip_time`, `date`) VALUES
+	(34, 'TRIP01', '1', 'DRV001', '11:10', NULL, NULL, 1200, 1300, 100, NULL, '2015-07-05'),
+	(35, 'TRIP01', '1', 'DRV001', '19:17', NULL, NULL, 1300, 1500, 200, NULL, '2015-07-06'),
+	(36, 'TRIP02', '2', 'DRV001', '19:17', NULL, NULL, 1500, 1700, 200, NULL, '2015-07-06'),
+	(37, 'TRIP01', '1', 'DRV001', '19:17', NULL, NULL, 1500, 1700, 200, NULL, '2015-07-06'),
+	(38, 'TRIP02', '1', 'DRV001', '10:10', NULL, NULL, 1700, NULL, NULL, NULL, '2015-07-06');
+/*!40000 ALTER TABLE `trip_details` ENABLE KEYS */;
 
 
--- Dumping structure for table transport.vechile_details
-CREATE TABLE IF NOT EXISTS `vechile_details` (
+-- Dumping structure for table transport.vehicle_details
+CREATE TABLE IF NOT EXISTS `vehicle_details` (
   `id` varchar(50) NOT NULL,
-  `vechile_name` varchar(64) DEFAULT NULL,
+  `vehicle_no` varchar(64) DEFAULT NULL,
+  `vehicle_name` varchar(64) DEFAULT NULL,
+  `driver_id` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Data exporting was unselected.
+-- Dumping data for table transport.vehicle_details: ~3 rows (approximately)
+/*!40000 ALTER TABLE `vehicle_details` DISABLE KEYS */;
+INSERT INTO `vehicle_details` (`id`, `vehicle_no`, `vehicle_name`, `driver_id`) VALUES
+	('1', 'TN-37-AZ-0829', 'BUS', 'DRV001'),
+	('2', 'TN-37-AZ-0830', 'VAN', 'DRV002'),
+	('3', 'TN-37-AZ-0831', 'TRAVELLER', 'DRV003');
+/*!40000 ALTER TABLE `vehicle_details` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
