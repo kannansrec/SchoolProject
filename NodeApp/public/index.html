@@ -74,19 +74,36 @@
 -->
         </div>
         <div class="row page-header">
-            Transport App
-             <button class="btn btn-primary" ng-click="showNewContent()"><span class="glyphicon glyphicon-plus"></span></button>
+            <div class="col-md-3 col-xs-3">
+                <h3>Transport App</h3>
+            </div>
+            <div class="col-md-1 col-xs-1">
+                <button class="btn btn-primary" ng-click="showNewContent()"><span class="glyphicon glyphicon-plus"></span>
+                </button>
+            </div>
+            <div class="col-md-1 col-xs-1">
+                <button class="btn btn-primary" ng-click="showSearch()"><span class="glyphicon glyphicon-search"></span>
+                </button>
+            </div>
         </div>
-      
+        <div class="row"  ng-show="showSearchDiv">
+            <div class="col-md-2 col-xs-2">
+                <input class="form-control" type="text" ng-model="search.vehicle_no"  placeholder="Vehicle No" >
+            </div>
+            <div class="col-md-2 col-xs-2">
+                <input class="form-control" type="text" ng-model="search.trip_name" placeholder="Trip Name">                
+            </div>
+        <div class="col-md-2 col-xs-2">
+            <button type="button" class="btn btn-danger" ng-click="hideContent()"><span class="glyphicon glyphicon-remove"></span></button></div>
+        </div>
         <!--
         <div class="row">No of Drivers :
             <input type="text" value={{records.length}}>
-        </div>
--->
-        <div ng-show="showNewDialog">
+        </div>-->
+        <div ng-show="showNewDiv">
             <div class="row form-group">
                 <div class="col-md-4">Vechile No:
-                    <select id="vechile" class="form-control" ng-change="getVehicleEndKM(formData.vehicle_no)" ng-options="data.id as  data.id +'  ('+ data.vehicle_no +')'  for data in vehicles" ng-model="formData.vehicle_no">
+                    <select class="form-control" ng-change="getVehicleEndKM(formData.vehicle_no)" ng-options="value.id as  value.id +'  ('+ value.vehicle_no +')'  for value in vehicles" ng-model="formData.vehicle_no">
                     </select>
                 </div>
                 <div class="col-md-4">Trip:
@@ -101,15 +118,15 @@
                     <input id="startkm" type="text" class="form-control" ng-model="formData.start_km" onkeypress="javascript:return isNumber (event)">
                 </div>
                 <div class="col-md-4">End KM :
-                    <input id="endkm" type="text" class="form-control" ng-model="formData.end_km" onkeypress="javascript:return isNumber (event)">
+                    <input id="endkm" type="text" class="form-control" ng-model="formData.end_km" onkeypress="javascript:return isNumber (event)" disabled>
                 </div>
-                 <div class="col-md-4">Date:
-                    <input id="trip_date" name="TripDate" type="date" class="form-control input-md" ng-model="formData.date">
+                <div class="col-md-4">Date:
+                    <input id="trip_date" name="TripDate" type="date" class="form-control input-md" ng-model="formData.date" disabled>
                 </div>
                 <div class="col-md-4">KM Covered:
                     <input id="totalkm" type="text" class="form-control" ng-model="formData.total_km" disabled>
                 </div>
-                
+
                 <div class="col-md-4">
                     <p>Out Time:</p>
                     <div class="col-md-4">
@@ -121,49 +138,105 @@
                     </div>
                     <div class="col-md-1">Min</div>
                 </div>
-                 <div ng-hide="hidediv" >
-                    <input type="text" ng-model="formData.leaving_time" value="{{ tempData.outhr + tempData.outmin}}"  >
-                </div>
-                 <div class="col-md-4">
+                <div class="col-md-4">
                     <p>In Time:</p>
                     <div class="col-md-4">
-                        <select class="form-control" ng-model="tempData.inhstep" ng-options="data for data in options.hstep"></select>
+                        <select class="form-control" ng-model="tempData.inhstep" ng-options="data for data in options.hstep" disabled></select>
                     </div>
                     <div class="col-md-1">Hr</div>
                     <div class="col-md-4">
-                        <select class="form-control" ng-model="tempData.inmstep" ng-options="opt for opt in options.mstep"></select>
+                        <select class="form-control" ng-model="tempData.inmstep" ng-options="opt for opt in options.mstep" disabled></select>
                     </div>
                     <div class="col-md-1">Min</div>
                 </div>
                 <div class="col-md-4">
-                    <button type="button" class="btn btn-primary" ng-click="createRecord('trip_details')">Save</button>
-                    <button type="button" class="btn btn-danger " ng-click="hideNewContent()">cancel</button>
+                    <button type="button" class="btn btn-success" ng-click="createRecord('trip_details')">Save <span class="glyphicon glyphicon-floppy-disk"></button>
+                    
+                    <button type="button" class="btn btn-danger " ng-click="hideContent()">Cancel     <span class="glyphicon glyphicon-remove"></button>
+                </div>
+            </div>
+        </div>
+        <div  ng-show="showUpdateDiv">
+            <div class="row form-group">
+                <div class="col-md-4">Vechile No:
+                    <select class="form-control" ng-options="data.id as  data.id +'  ('+ data.vehicle_no +')'  for data in vehicles" ng-model="formData.vehicle_no" disabled>
+                    </select>
+                </div>
+                <div class="col-md-4">Trip:
+                    <select id="trip" class="form-control" ng-options="data.id as data.trip_name for data in trips" ng-model="formData.trip_name" disabled>
+                    </select>
+                </div>
+                <div class="col-md-4">Driver:
+                    <select id="driver" class="form-control" ng-options="data.id as data.driver_name for data in drivers" ng-model="formData.driver_id" disabled>
+                    </select>
+                </div>
+                <div class="col-md-4">Start KM :
+                    <input id="startkm" type="text" class="form-control" ng-model="formData.start_km" onkeypress="javascript:return isNumber (event)" disabled>
+                </div>
+                <div class="col-md-4">End KM :
+                    <input id="endkm" type="text" class="form-control" ng-model="formData.end_km" onkeypress="javascript:return isNumber (event)">
+                </div>
+                <div class="col-md-4">Date:
+                    <input id="trip_date" name="TripDate" type="date" class="form-control input-md" ng-model="formData.date" disabled>
+                </div>
+                <div class="col-md-4">KM Covered:
+                    <input id="totalkm" type="text" class="form-control" ng-model="formData.total_km" disabled>
+                </div>
+
+                <div class="col-md-4">
+                    <p>Out Time:</p>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="tempData.outhr" ng-options="data for data in options.hstep" disabled></select>
+                    </div>
+                    <div class="col-md-1">Hr</div>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="tempData.outmin" ng-options="opt for opt in options.mstep" disabled></select>
+                    </div>
+                    <div class="col-md-1">Min</div>
+                </div>
+                <div ng-hide="hidediv">
+                    <input type="text" ng-model="formData.entering_time" value="{{ tempData.inhr + tempData.inmin}}">
+                </div>
+                
+                <div class="col-md-4">
+                    <p>In Time:</p>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="tempData.inhr" ng-options="data for data in options.hstep"></select>
+                    </div>
+                    <div class="col-md-1">Hr</div>
+                    <div class="col-md-4">
+                        <select class="form-control" ng-model="tempData.inmin" ng-options="opt for opt in options.mstep"></select>
+                    </div>
+                    <div class="col-md-1">Min</div>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-success" ng-click="updateRecord('trip_details',formData.id,formData)">Update <span class="glyphicon glyphicon-floppy-disk"></button>
+                    <button type="button" class="btn btn-danger " ng-click="hideContent()">Cancel     <span class="glyphicon glyphicon-remove"></button>
                 </div>
             </div>
         </div>
         <div>
-            <p>Trip List</p>
             <table class="table table-striped">
                 <thead>
-                    <tr>
+                    <tr>    
                         <th>Trip ID</th>
-                        <th>Trip Name</th>
                         <th>Vehicle No</th>
+                        <th>Trip Name</th>
                         <th>Driver Name</th>
                         <th>Out Time</th>
                         <th>In Time</th>
                         <th>Start KM</th>
                         <th>End KM</th>
                         <th>Total KM</th>
-                        <th>Trip time</th>
+                        <!--th>Trip time</th-->
                         <th>Date</th>
                     </tr>
                 </thead>
                 <tbody ng-model="formData">
-                    <tr ng-repeat="data in records">
+                    <tr ng-repeat="data in records | filter: search ">
                         <td>{{ data.id }}</td>
-                        <td>{{ data.trip_name }}</td>
                         <td>{{ data.vehicle_no }}</td>
+                        <td>{{ data.trip_name }}</td>
                         <td>{{ data.driver_id }}</td>
                         <td>{{ data.leaving_time }}</td>
                         <td>{{ data.entering_time }}</td>
@@ -174,7 +247,7 @@
                         <td>{{ data.date | date: 'dd/MM/yyyy' }}</td>
                         <td>
                             <div class="btn-group btn-group-xs">
-                                <button type="button" class="btn btn-default" ng-click="updateRecord('trip_details',data.id,data)">
+                                <button type="button" class="btn btn-default" ng-click="editRecord('trip_details',data.id,data)">
                                     <span class="glyphicon glyphicon-pencil"></span>Edit</button>
                                 <button type="button" class="btn btn-danger" ng-click="deleteRecord('trip_details',data.id)">
                                     <span class="glyphicon glyphicon-trash"></span>Trash</button>

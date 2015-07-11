@@ -54,11 +54,31 @@
     });
 
     // get last trip end KM of the vehicle
-    app.get("/api/:tablename/:vehicle_no", function(req, res) {
+    app.get("/api/:tablename/vehicle/:vehicle_no", function(req, res) {
         console.log("Table Requested using 'GET' was:" + req.params.tablename);
         var tablename = req.params.tablename;
         var vehicle_no = req.params.vehicle_no;
         var strQuery = "select end_km from " + tablename +" where vehicle_no="+vehicle_no+" order by id desc limit 1";
+        connection.query(strQuery, function(err, rows, fields) {
+            if (!err) {
+                console.log(rows);
+                res.json(rows);
+            } else {
+                res.send(err);
+                console.log('Error while performing Query.');
+            }
+            //connection.end();
+        });
+    });
+
+    //get trip details of today's Date
+    app.get("/api/:tablename/date/:today", function(req, res) {
+        console.log("Table Requested using 'GET' was:" + req.params.tablename);
+        var tablename = req.params.tablename;
+        var today = req.params.today;
+        console.log(today);
+        var strQuery = "select * from " + tablename +" where date='"+today+"'";
+        console.log(strQuery);
         connection.query(strQuery, function(err, rows, fields) {
             if (!err) {
                 console.log(rows);
@@ -95,7 +115,15 @@
         var id = req.params.id;
         var tablename = req.params.tablename;
         var input = JSON.parse(JSON.stringify(req.body));
-        connection.query("UPDATE " + tablename + " set ? WHERE id = ? ", [input, id], function(err, rows) {
+         var data = {
+            entering_time    : input.entering_time,
+            end_km : input.end_km,
+            total_km   : input.total_km,
+        };
+        console.log(input);
+       // input.remove(date);
+        //console.log(input);
+        connection.query("UPDATE " + tablename + " set ? WHERE id = ? ", [data, id], function(err, rows) {
             if (err) {
                 console.log("ERROR MSG:" + err);
                 res.send("Error Occured :" + err);
