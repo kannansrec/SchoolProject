@@ -49,6 +49,8 @@ app.controller('myctrl', function($scope, $http) {
         $scope.showNewDiv = true;
         $scope.showSearchDiv =false;
         $scope.formData.date = new Date();
+        $scope.tempData.outhr = new Date().getHours();  
+        $scope.tempData.outmin = new Date().getMinutes();  
       if($scope.isContentLoaded == "0"){
         $scope.getSupportingRecords('driver_info', 'drivers');
         $scope.getSupportingRecords('vehicle_details', 'vehicles');
@@ -203,15 +205,18 @@ app.controller('myctrl', function($scope, $http) {
          $scope.splitedText =  $scope.formData.leaving_time.split(":");
          $scope.tempData.outhr= Number($scope.splitedText[0]);
          $scope.tempData.outmin= Number($scope.splitedText[1]);         
+        if($scope.formData.entering_time == undefined){
+         $scope.tempData.inhr = new Date().getHours();
+         $scope.tempData.inmin = new Date().getMinutes();
+        }
     };
     
     
 // Update a todo after checking it
     $scope.updateRecord = function(tablename, id, id_data) {
         $scope.formData = id_data;
-        alert("tablename:" + tablename + ", id: " + id + "id_data:" + id_data.value);
         if($scope.formData.end_km > $scope.formData.start_km){
-            if($scope.tempData.inhr >  $scope.tempData.outhr){
+            if($scope.tempData.inhr >=  $scope.tempData.outhr){
                 $scope.formData.total_km = $scope.formData.end_km - $scope.formData.start_km;
                 $scope.formData.entering_time = $scope.tempData.inhr + ':' + $scope.tempData.inmin;        
                    $http.post('/api/'+tablename+'/' + id ,$scope.formData)

@@ -40,7 +40,7 @@
                 <img class="img-responsive" src="img/logo-new.jpg" alt="Chania">
             </div>
             <div class="col-md-4">
-                <h>abc Co-operation</h>
+                <h>Camford International School</h>
             </div>
         </div>
         <div class="row">
@@ -219,6 +219,7 @@
             <table class="table table-striped">
                 <thead>
                     <tr>    
+                        <th>Action</th>
                         <th>Trip ID</th>
                         <th>Vehicle No</th>
                         <th>Trip Name</th>
@@ -234,6 +235,14 @@
                 </thead>
                 <tbody ng-model="formData">
                     <tr ng-repeat="data in records | filter: search ">
+                         <td>
+                            <div class="btn-group btn-group-xs">
+                                <button type="button" class="btn btn-primary" ng-click="editRecord('trip_details',data.id,data)">
+                                    <span class="glyphicon glyphicon-pencil"></span>Edit</button>
+                                <!--button type="button" class="btn btn-danger" ng-click="deleteRecord('trip_details',data.id)">
+                                    <span class="glyphicon glyphicon-trash"></span>Trash</button-->
+                            </div>
+                        </td>
                         <td>{{ data.id }}</td>
                         <td>{{ data.vehicle_no }}</td>
                         <td>{{ data.trip_name }}</td>
@@ -245,14 +254,7 @@
                         <td>{{ data.total_km }}</td>
                         <td>{{ data.trip_time }}</td>
                         <td>{{ data.date | date: 'dd/MM/yyyy' }}</td>
-                        <td>
-                            <div class="btn-group btn-group-xs">
-                                <button type="button" class="btn btn-default" ng-click="editRecord('trip_details',data.id,data)">
-                                    <span class="glyphicon glyphicon-pencil"></span>Edit</button>
-                                <button type="button" class="btn btn-danger" ng-click="deleteRecord('trip_details',data.id)">
-                                    <span class="glyphicon glyphicon-trash"></span>Trash</button>
-                            </div>
-                        </td>
+                       
                     </tr>
                 </tbody>
             </table>
