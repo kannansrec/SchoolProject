@@ -1,0 +1,28 @@
+<ion-view title="Dashboard" style="height:500%">
+  <ion-content> 
+<!--               on-swipe-right="goBack()" on-swipe-left="goForward()">-->
+    <ion-list class="ion-list-view list-inset">
+      <ul class="list">
+        <li ng-repeat="data in records | filter: search " class="item my-list" ui-sref="updatetrip({'record':data})">
+          <ion-item>
+            <div class="row fullheight">
+              <div class="col col-20 col-center">
+                <span>{{ data.id }}</span>
+              </div>
+              <div class="col col-20 col-center">
+                <span class="font-page">{{ data.vehicle_no }}</span>
+              </div>
+              <div class="col col-20 col-center">
+                <span class="font-page">{{ data.trip_name }}</span>
+              </div>
+              <div class="col item-text-wrap col-center card-footer " style="text-align:right;padding-right:10px;">
+                <span>{{ data.date | date: 'dd/MM/yyyy' }}</span>
+              </div>
+              <ion-option-button class="button-assertive icon ion-trash-a " ng-click="deleteRecord('trip_details',data.id)"></ion-option-button>
+            </div>
+          </ion-item>
+        </li>
+      </ul>
+    </ion-list>
+  </ion-content>
+</ion-view>

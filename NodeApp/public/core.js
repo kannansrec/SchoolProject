@@ -21,7 +21,7 @@ app.controller('myctrl', function($scope, $http) {
     $scope.hidediv= true;
     $scope.options = {
         hstep: [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-        mstep: [0, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 5, 59, ]
+        mstep: [0, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, ]
     };
 
     $scope.tempData = {};
@@ -85,9 +85,15 @@ app.controller('myctrl', function($scope, $http) {
 
     //tablename=tablename.value;
 
-    // when the page is loaded, invoke this to display data
-
-    $http.get('/api/trip_details/date/'+moment().format('YYYY-MM-DD'))
+    function getYesterdaysDate() {
+    var date = new Date();
+    date.setDate(date.getDate()-3);
+    return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+ date.getDate();  
+}
+    
+    var newDate = getYesterdaysDate();
+    
+    $http.get('/api/trip_details/date/'+newDate)
         .success(function(data) {
             $scope.records = data;
             //  console.log(data);
@@ -145,8 +151,7 @@ app.controller('myctrl', function($scope, $http) {
         //         tablename ='driver_info';
         $http.get('/api/' + tablename)
             .success(function(data) {
-          
-                $scope.records = data;
+                  $scope.records = data;
                  console.log(data);
             })
             .error(function(data) {
@@ -216,7 +221,7 @@ app.controller('myctrl', function($scope, $http) {
     $scope.updateRecord = function(tablename, id, id_data) {
         $scope.formData = id_data;
         if($scope.formData.end_km > $scope.formData.start_km){
-            if($scope.tempData.inhr >=  $scope.tempData.outhr){
+           //if($scope.tempData.inhr >=  $scope.tempData.outhr){
                 $scope.formData.total_km = $scope.formData.end_km - $scope.formData.start_km;
                 $scope.formData.entering_time = $scope.tempData.inhr + ':' + $scope.tempData.inmin;        
                    $http.post('/api/'+tablename+'/' + id ,$scope.formData)
@@ -228,10 +233,10 @@ app.controller('myctrl', function($scope, $http) {
                         .error(function(data) {
                             console.log('Error: ' + data);
                         });
-                }
-            else{
-                alert("Data Not saved, In time should be greater than Out time");
-            }
+            //    }
+//            else{
+//                alert("Data Not saved, In time should be greater than Out time");
+//            }
         }
         else{
             alert("Data Not save ,End Km is less than Start Km, Please check the Data");

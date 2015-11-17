@@ -1,0 +1,8 @@
+{
+    "jscodehints.detectedExclusions": [
+        "D:/Personal/Learning/Project/GitHubRepository/SchoolApp/SchoolProject/MobileApp/myAppMenu/www/js/controllers.js",
+        "D:/Personal/Learning/Project/GitHubRepository/SchoolApp/SchoolProject/MobileApp/myAppMenu/www/js/controller/baseController.js",
+        "D:/Personal/Learning/Project/GitHubRepository/SchoolApp/SchoolProject/MobileApp/myAppMenu/www/js/controller/dashboardController.js",
+        "D:/Personal/Learning/Project/GitHubRepository/SchoolApp/SchoolProject/MobileApp/myAppMenu/www/js/controller/loginController.js"
+    ]
+}

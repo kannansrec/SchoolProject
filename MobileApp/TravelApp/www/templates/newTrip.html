@@ -1,0 +1,43 @@
+<ion-view title="New Trip">
+    <ion-content padding="true" class="has-header">
+        <div class="button-bar">
+            <a href="#/dashboard" class="button button-light button-block button-small icon ion-android-arrow-back"></a>
+            <button class="button button-stable button-block  icon-left ion-android-bus button-full">New Trip</button>
+        </div>
+        <form class="list">
+            <label class="item item-select" name="Vehicle No">
+                <span class="input-label">Vehicle No</span>
+                <select></select>
+            </label>
+            <label class="item item-select" name="Trip No">
+                <span class="input-label">Trip No</span>
+                <select></select>
+            </label>
+            <label class="item item-select" name="DriverName">
+                <span class="input-label">DriverName</span>
+                <select></select>
+            </label>
+            <label class="item item-input" name="Start KM">
+                <span class="input-label">Start KM</span>
+                <input type="number" placeholder="Start KM">
+            </label>
+            <label class="item item-input" name="End KM">
+                <span class="input-label">End KM</span>
+                <input type="number" placeholder="End KM">
+            </label>
+            <label class="item item-input" name="IN Time">
+                <span class="input-label">IN Time</span>
+                <input type="date" placeholder="IN Time">
+            </label>
+            <label class="item item-input" name="OUT Time">
+                <span class="input-label">OUT Time</span>
+                <input type="date" placeholder="OUT Time">
+            </label>
+            <label class="item item-input" name="Total KM">
+                <span class="input-label">Total KM</span>
+                <input type="number" placeholder="Total KM">
+            </label>
+            <a href="#/dashboard" class="button button-stable button-block  icon-left ion-android-done">Save Trip</a>
+        </form>
+    </ion-content>
+</ion-view>

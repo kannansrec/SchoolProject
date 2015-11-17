@@ -1,0 +1,12 @@
+.myinput-positive {
+    background-color: #387ef5;
+    text-align: right;
+    padding-right: 10px;
+    color: #fff;
+  }
+.my-list {
+padding: 0px; 
+border-width: 1px;
+border-style: dashed;
+margin-left: -1;
+  }

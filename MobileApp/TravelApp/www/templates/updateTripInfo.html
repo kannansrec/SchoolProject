@@ -1,0 +1,45 @@
+<ion-view title="Update Trip Info">
+    <ion-content padding="true" class="has-header">
+        <div class="button-bar">
+            <a href="#/dashboard" class="button button-stable button-block  icon ion-android-arrow-back"></a>
+            <button class="button button-stable button-block ">Update Trip Info</button>
+            <button class="button button-stable button-block "></button>
+            <button class="button button-stable button-block "></button>
+        </div>
+        <form class="list">
+            <label class="item item-select" name="vehicle_no">
+                <span class="input-label">Vehicle No</span>
+                <select></select>
+            </label>
+            <label class="item item-select" name="trip_no">
+                <span class="input-label">Trip No</span>
+                <select></select>
+            </label>
+            <label class="item item-select" name="driver_name">
+                <span class="input-label">Driver Name</span>
+                <select></select>
+            </label>
+            <label class="item item-input" name="start_km">
+                <span class="input-label">Start KM</span>
+                <input type="number" placeholder="Start KM">
+            </label>
+            <label class="item item-input" name="end_km">
+                <span class="input-label">End KM</span>
+                <input type="number" placeholder="End KM">
+            </label>
+            <label class="item item-input" name="in_time">
+                <span class="input-label">IN Time</span>
+                <input type="date" placeholder="IN Time">
+            </label>
+            <label class="item item-input" name="out_time">
+                <span class="input-label">OUT Time</span>
+                <input type="date" placeholder="OUT Time">
+            </label>
+            <label class="item item-input" name="total_km">
+                <span class="input-label">Total KM</span>
+                <input type="number" placeholder="Total KM">
+            </label>
+            <a href="#/dashboard" class="button button-stable button-block  icon-left ion-android-bus">Update Info</a>
+        </form>
+    </ion-content>
+</ion-view>

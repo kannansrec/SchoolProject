@@ -1,0 +1,23 @@
+<ion-view title="Login">
+  <ion-content padding="true">
+    <form class="list">
+      <ion-list>
+<!--          <img style="margin:0px auto;display:block" src='img/logo-new.png'>-->
+        <img style="margin:0px auto;display:block ;width: 100%; height: auto; padding :10%; " src='img/logo-new.png'>
+        <label class="item item-input" name="user email id">
+          <span class="input-label">Username</span>
+          <input type="email" placeholder="Email Id" ng-model="loginData.userName">
+        </label>
+        <label class="item item-input" name="password">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="Password" ng-model="loginData.password">
+        </label>
+      </ion-list>
+      <a class="button button-positive button-block " ng-click="doLogin()">Log in</a>
+      <a href="#/signup" class="button button-positive button-clear button-block ">Or create an account</a>
+    </form>
+<!--       <img style="margin:0px auto;display:block" src='img/hyZOJTXDQlnw9XqrENsr_transport.png'>-->
+    <img src="img/hyZOJTXDQlnw9XqrENsr_transport.png" style="width: 100%; height: auto;">   
+  </ion-content>
+</ion-view>
+

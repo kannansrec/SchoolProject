@@ -1,0 +1,40 @@
+<!--<ion-nav-view name="dashboard" ng-controller="BaseController">-->
+<ion-view title="Dashboard" cache-view="false">
+  <!--  <ion-header-bar align-title="left" class="bar bar-header bar-positive">-->
+  <div class="bar bar-header bar-positive">
+    <h1 class="title">Dashboard</h1>
+    <a href="#/newtrip" class="button button-icon ion-android-add-circle"></a>
+    <a href="#/searchtrip" class="button button-icon ion-search"></a>
+    <a href="#/userinfo" class="button button-icon icon-right ion-android-person">
+      <input class="myinput-positive" type="text" ng-model="loginData.user_name" disabled style="display: inline-block;
+    width: 50%; background-color: #387ef5; color: #fff;text-align: right;  padding-right: 5px;font-size: 10px;">
+    </a>
+  </div>
+  <ion-content padding="true" class="has-header">
+    <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" ng-model="search.vehicle_no" placeholder="Search By Bus No">
+      </label>
+      <button class="button button-clear">
+        Cancel
+      </button>
+    </div>
+    <div class="row fullheight">
+      <div class="col col-20 col-center">
+        <span class="font-page">Trip ID</span>
+      </div>
+      <div class="col col-20 col-center">
+        <span class="font-page">Vehicle No</span>
+      </div>
+      <div class="col col-20 col-center">
+        <span class="font-page"> Trip Name</span>
+      </div>
+      <div class="col item-text-wrap col-center card-footer " style="text-align:right;padding-right:10px;">
+        <span class="font-page">Date</span>
+      </div>
+    </div>
+    <ion-nav-view name="trip-list"></ion-nav-view>
+  </ion-content>
+</ion-view>
+

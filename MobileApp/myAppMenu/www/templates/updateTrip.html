@@ -1,0 +1,64 @@
+<ion-view title="Update Trip Info" cache-view="false">
+  <ion-header-bar align-title="left" class="bar bar-header bar-positive">
+    <span class="title font-title">
+      <a class="button button-icon button-small icon-right ion-android-arrow-back"
+         ng-click="$ionicGoBack()"></a>Update Trip Info
+   </span>
+  </ion-header-bar>
+  <ion-content padding="true" class="has-header">
+    <div class="list">
+      <label class="item item-input item-select">
+        <div class="input-label static-labels no-padding" style="height:auto;">Vehicle No</div>
+        <select id="driver" class="form-control" ng-options="value.id as  value.id +'  ('+ value.vehicle_no +')'  for value in vehicles" ng-model="formData.vehicle_no" style="padding-right: 35% !important;" disabled></select>
+      </label>
+      <label class="item item-select" name="trip_no">
+        <div class="input-label">Trip No</div>
+        <select class="form-control" ng-options="data.id as data.trip_name for data in trips" ng-model="formData.trip_name" style="padding-right: 35% !important;" disabled></select>
+      </label>
+      <label class="item item-select" name="driver_name">
+        <span class="input-label">Driver Name</span>
+        <select class="form-control" ng-options="data.id as data.driver_name for data in drivers" ng-model="formData.driver_id" style="padding-right: 35% !important;" disabled></select>
+      </label>
+      <label class="item item-input" name="start_km">
+        <span class="input-label">Start KM</span>
+        <input type="number" placeholder="Start KM" ng-model="formData.start_km" disabled>
+      </label>
+      <label class="item item-input" name="end_km">
+        <span class="input-label">End KM</span>
+        <input type="number" placeholder="End KM" ng-model="formData.end_km">
+      </label>
+      <label class="item item-input" name="Date">
+        <span class="input-label">Date</span>
+          <span>{{ formData.date | date:'dd-MM-yyyy'}}</span><br>
+<!--        <input type="date" placeholder="Date" ng-model="formData.date">-->
+      </label>
+      <label class="item item-input" name="out_time">
+        <span class="input-label">OUT Time</span>
+        <div class="col">
+          <select class="form-control" ng-model="tempData.outhr" ng-options="data for data in options.hstep" disabled></select>
+        </div>
+        <div class="col">Hr</div>
+        <div class="col">
+          <select class="form-control" ng-model="tempData.outmin" ng-options="opt for opt in options.mstep" disabled></select>
+        </div>
+        <div class="col">Min</div>
+      </label>
+      <label class="item item-input" name="in_time">
+        <span class="input-label">IN Time</span>
+        <div class="col">
+          <select class="form-control" ng-model="tempData.inhr" ng-options="data for data in options.hstep"></select>
+        </div>
+        <div class="col">Hr</div>
+        <div class="col">
+          <select class="form-control" ng-model="tempData.inmin" ng-options="opt for opt in options.mstep"></select>
+        </div>
+        <div class="col">Min</div>
+      </label>
+      <button class="button button-full button-positive icon-left ion-android-bus" ng-click="updateRecord()">
+        Update Trip Info
+      </button>
+      
+    </div>
+  </ion-content>
+</ion-view>
+
