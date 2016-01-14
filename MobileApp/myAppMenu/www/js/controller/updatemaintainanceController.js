@@ -1,35 +1,23 @@
-cortrollerModule.controller('UpdateTripController', ['$http', '$scope', '$rootScope', '$stateParams', '$state',
+cortrollerModule.controller('UpdateMaintainanceController', ['$http', '$scope', '$rootScope', '$stateParams', '$state',
   function($http, $scope, $rootScope, $stateParams, $state) {
     $scope.formData = {};
-    $scope.tempData = {};
-    $scope.options = $rootScope.hrmin;
-    $scope.formData = $stateParams.record;
+    $scope.maintainancetype = [{
+      value: "Fuel"
+    }, {
+      value: "Service"
+    }];
     $scope.trips = $rootScope.trips;
     $scope.drivers = $rootScope.drivers;
     $scope.vehicles = $rootScope.vehicles;
-    $scope.splitedText = $scope.formData.leaving_time.split(":");
-    $scope.tempData.outhr = Number($scope.splitedText[0]);
-    $scope.tempData.outmin = Number($scope.splitedText[1]);
-    if ($scope.formData.entering_time == undefined) {
-      $scope.tempData.inhr = new Date().getHours();
-      $scope.tempData.inmin = new Date().getMinutes();
-    } else {
-      $scope.splitedText1 = $scope.formData.entering_time.split(":");
-      $scope.tempData.inhr = Number($scope.splitedText1[0]);
-      $scope.tempData.inmin = Number($scope.splitedText1[1]);
-    }
+    $scope.formData = $stateParams.record;
 
-    $scope.test = function() {
-      alert("First Entry");
-    };
 
     $scope.updateRecord = function() {
       if ($scope.formData.end_km > $scope.formData.start_km) {
         //if($scope.tempData.inhr >=  $scope.tempData.outhr){
         $scope.formData.total_km = $scope.formData.end_km - $scope.formData.start_km;
-        $scope.formData.entering_time = $scope.tempData.inhr + ':' + $scope.tempData.inmin;
         $http({
-          url: $rootScope.baseURL + '/api/trip_details/' + $scope.formData.id,
+          url: $rootScope.baseURL + '/api/vehicle_maintainance/' + $scope.formData.id,
           method: 'POST',
           data: $scope.formData,
           headers: {
@@ -57,6 +45,8 @@ cortrollerModule.controller('UpdateTripController', ['$http', '$scope', '$rootSc
     $scope.calculateTotalKm = function(vehicle_no) {
       $scope.formData.total_km = $scope.formData.end_km - $scope.formData.start_km;
     };
-
+    $scope.calculateTotalAmount = function() {
+    $scope.formData.maintainance_amount = ( $scope.formData.price_per_liter * $scope.formData.fuel_quantity );
+  };
   }
 ]);

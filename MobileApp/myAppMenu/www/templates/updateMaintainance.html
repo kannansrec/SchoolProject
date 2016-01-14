@@ -1,0 +1,59 @@
+<ion-view title="New Trip" cache-view="false">
+  <ion-header-bar align-title="left" class="bar bar-header bar-positive">
+    <span class="title font-title">
+      <a class="button button-icon button-small icon-right ion-android-arrow-back"
+         ng-click="$ionicGoBack()"></a>Maintainance
+   </span>
+  </ion-header-bar>
+  <ion-content padding="true" class="has-header">
+    <div class="list">
+    <label class="item item-input item-select">
+        <div class="input-label static-labels no-padding" style="height:auto;">Vehicle No</div>
+        <select id="driver" class="form-control" ng-change="getVehicleEndKM(formData.vehicle_no)" ng-options="value.id as  value.id +'  ('+ value.vehicle_no +')'  for value in vehicles" ng-model="formData.vehicle_no" style="padding-right: 35% !important;"></select>
+      </label>
+      <label class="item item-select" name="main_type">
+        <div class="input-label">Maintanance Type</div>
+        <select class="form-control" ng-options="data.value as data.value for data in maintainancetype" ng-model="formData.maintainance_type" style="padding-right: 35% !important;"></select>
+      </label>
+      <label class="item item-select" name="driver_name">
+        <span class="input-label">Driver Name</span>
+        <select class="form-control" ng-options="data.id as data.driver_name for data in drivers" ng-model="formData.driver_id" style="padding-right: 35% !important;"></select>
+      </label>
+      <label class="item item-input" name="start_km">
+        <span class="input-label">Start KM</span>
+        <input type="number" placeholder="Start KM" ng-model="formData.start_km">
+      </label>
+      <label class="item item-input" name="end_km">
+        <span class="input-label">End KM</span>
+        <input type="number" placeholder="End KM" ng-change="calculateTotalKm()" ng-model="formData.end_km">
+      </label>
+      <label class="item item-input" name="total_km">
+        <span class="input-label">Total KM</span>
+        <input type="number" placeholder="Total KM" ng-model="formData.total_km">
+      </label>
+      <label class="item item-input" name="Date">
+        <span class="input-label">Date</span>
+          <span>{{ formData.date | date:'dd-MM-yyyy'}}</span><br>
+      </label>
+       <label class="item item-input" name="fuel_quantity">
+        <span class="input-label">Qualtity</span>
+        <input type="number" placeholder="No of Liters"  ng-change="calculateTotalAmount()"  ng-model="formData.fuel_quantity">
+      </label>
+     <label class="item item-input" name="total_km">
+        <span class="input-label">Price Per Liter</span>
+        <input type="number" ng-model="formData.price_per_liter" disabled>
+      </label>
+        <label class="item item-input" name="Amount">
+        <span class="input-label">Amount</span>
+        <input type="number" placeholder="Amount" ng-model="formData.maintainance_amount">
+      </label>
+ 
+      <button class="button button-full button-positive icon-left ion-android-bus" ng-click="updateRecord()">
+        Update 
+      </button>
+
+    </div>
+  </ion-content>
+
+</ion-view>
+

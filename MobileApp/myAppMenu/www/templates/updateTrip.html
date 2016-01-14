@@ -25,13 +25,41 @@
       </label>
       <label class="item item-input" name="end_km">
         <span class="input-label">End KM</span>
-        <input type="number" placeholder="End KM" ng-model="formData.end_km">
+        <input type="number" placeholder="End KM" ng-change="calculateTotalKm()" ng-model="formData.end_km">
+      </label>
+         <label class="item item-input" name="total_km">
+        <span class="input-label">Total KM</span>
+        <input type="number" placeholder="Total KM" ng-model="formData.total_km">
       </label>
       <label class="item item-input" name="Date">
         <span class="input-label">Date</span>
           <span>{{ formData.date | date:'dd-MM-yyyy'}}</span><br>
 <!--        <input type="date" placeholder="Date" ng-model="formData.date">-->
       </label>
+         <div class="item item-input-inset">
+        <span class="input-label">OUT Time</span>
+        <label class="item-input-wrapper">
+            <select class="form-control" ng-model="tempData.outhr" ng-options="data for data in options.hstep" disabled></select>
+          <div class="col">Hr</div>
+        </label>
+        <label class="item-input-wrapper">
+          <select class="form-control" ng-model="tempData.outmin" ng-options="opt for opt in options.mstep" disabled></select>
+          <div class="col">Min</div>
+        </label>
+      </div>
+
+      <div class="item item-input-inset">
+        <span class="input-label">IN Time</span>
+        <label class="item-input-wrapper">
+            <select class="form-control" ng-model="tempData.inhr" ng-options="data for data in options.hstep"></select>         
+          <div class="col">Hr</div>
+        </label>
+        <label class="item-input-wrapper">
+          <select class="form-control" ng-model="tempData.inmin" ng-options="opt for opt in options.mstep"></select>
+          <div class="col">Min</div>
+        </label>
+      </div>
+<!--
       <label class="item item-input" name="out_time">
         <span class="input-label">OUT Time</span>
         <div class="col">
@@ -54,6 +82,7 @@
         </div>
         <div class="col">Min</div>
       </label>
+-->
       <button class="button button-full button-positive icon-left ion-android-bus" ng-click="updateRecord()">
         Update Trip Info
       </button>

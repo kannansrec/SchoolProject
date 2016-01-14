@@ -1,0 +1,55 @@
+<ion-view title="Trips" cache-view="false">
+
+  <ion-header-bar align-title="left" class="bar bar-header bar-positive">
+    <a href="#/dashboard" class="button button-icon ion-android-arrow-back"></a>
+    <h1 class="title" style="position: static; width: 55%;">Trips</h1>
+    <a href="#/newtrip" class="button button-icon ion-android-add-circle"></a>
+    <a href="#/searchtrip" class="button button-icon ion-search"></a>
+    <!--
+  <button class="button button-icon ion-android-add-circle"></button>
+  <button class="button button-icon ion-search"></button>
+-->
+    <!--
+
+    <span>
+    <a href="#/newtrip" class="button button-icon ion-android-add-circle"></a>
+    <a href="#/searchtrip" class="button button-icon ion-search"></a>
+          </span>
+-->
+  </ion-header-bar>
+
+  <!--
+  <div class="bar bar-header bar-positive">
+    <h1 class="title">Trips</h1>
+    <a href="#/newtrip" class="button button-icon ion-android-add-circle"></a>
+    <a href="#/searchtrip" class="button button-icon ion-search"></a>
+  </div>
+-->
+  <ion-content padding="true" class="has-header">
+    <div class="bar bar-header item-input-inset">
+      <label class="item-input-wrapper">
+        <i class="icon ion-ios-search placeholder-icon"></i>
+        <input type="search" ng-model="search.vehicle_no" placeholder="Search By Bus No">
+      </label>
+      <button class="button button-clear">
+        Cancel
+      </button>
+    </div>
+    <div class="row fullheight">
+      <div class="col col-25 col-center">
+        <span class="font-page">T ID</span>
+      </div>
+      <div class="col col-25 col-center">
+        <span class="font-page">Bus No</span>
+      </div>
+      <div class="col col-25 col-center">
+        <span class="font-page">T Name</span>
+      </div>
+      <div class="col col-25 col-center">
+        <span class="font-page">Tot Km</span>
+      </div>
+    </div>
+    <ion-nav-view name="trip-list"></ion-nav-view>
+  </ion-content>
+</ion-view>
+

@@ -2,7 +2,7 @@
   <ion-header-bar align-title="left" class="bar bar-header bar-positive">
     <span class="title font-title">
       <a class="button button-icon button-small icon-right ion-android-arrow-back"
-         ng-click="$ionicGoBack()"></a>Search Trip
+         ng-click="$ionicGoBack()"></a>Search Maintainance
    </span>
   </ion-header-bar>
   <ion-content padding="true" class="has-header">
@@ -16,21 +16,23 @@
         <div class="input-label static-labels no-padding" style="height:auto;">Vehicle No</div>
         <select class="form-control" ng-options="value.id as  value.id +'  ('+ value.vehicle_no +')'  for value in vehicles" ng-model="searchData.vehicle_no" style="padding-right: 35% !important;"></select>
       </label>
+<!--
       <label class="item item-select" name="trip_no">
         <div class="input-label">Trip No</div>
         <select class="form-control" ng-options="data.id as data.trip_name for data in trips" ng-model="searchData.trip_name" style="padding-right: 35% !important;"></select>
       </label>
+-->
       <button class="button button-stable button-block  icon-left ion-search" ng-click="searchFun()">Search</button>
     </form>
     <div class="row fullheight">
       <div class="col col-25 col-center">
-        <span class="font-page">T ID</span>
+        <span class="font-page">M ID</span>
       </div>
       <div class="col col-25 col-center">
         <span class="font-page">Bus No</span>
       </div>
       <div class="col col-25 col-center">
-        <span class="font-page">T Name</span>
+        <span class="font-page">M Amount</span>
       </div>
         <div class="col col-30 col-center">
         <span class="font-page">Tot Km</span>
@@ -43,7 +45,7 @@
     </div>
     <ion-list class="ion-list-view list-inset" show-delete="false" can-swipe="false">
       <ul class="list">
-        <li ng-repeat="data in records | filter: search " class="item my-list" ui-sref="updatetrip({'record':data})">
+        <li ng-repeat="data in records | filter: search " class="item my-list" ui-sref="updatemaintainance({'record':data})">
           <div class="row fullheight">
             <div class="col col-25 col-center">
               <span>{{ data.id }}</span>
@@ -52,24 +54,17 @@
               <span class="font-page">{{ data.vehicle_no }}</span>
             </div>
             <div class="col col-25 col-center">
-              <span class="font-page">{{ data.trip_name }}</span>
+              <span class="font-page">{{ data.maintainance_amount }}</span>
             </div>
             <div class="col col-25 col-center">
               <span class="font-page">{{ data.total_km }}</span>
             </div>
-
-<!--
-            <div class="col item-text-wrap col-center card-footer " style="text-align:right;padding-right:10px;">
-              <span>{{ data.date | date: 'dd/MM/yyyy' }}</span>
-            </div>
--->
-            <!--				<ion-option-button class="button-assertive icon ion-trash-a " ng-click="deleteRecord(item)"></ion-option-button>-->
           </div>
         </li>
 
       </ul>
     </ion-list>
-    <ion-nav-view name="trip-list"></ion-nav-view>
+    <ion-nav-view name="maintanance-list"></ion-nav-view>
   </ion-content>
 </ion-view>
 

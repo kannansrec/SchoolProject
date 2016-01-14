@@ -8,9 +8,11 @@ cortrollerModule.controller('LoginController', function($scope, $ionicModal, $ti
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-  $rootScope.baseURL= "http://192.168.0.111:8080";
-  //$rootScope.baseURL= "http://10.195.3.71:8080";    
-  //  $rootScope.baseURL= "http://192.168.0.101:8080";    
+   //live 
+   $rootScope.baseURL= "http://192.168.4.253:8090";//school
+  // $rootScope.baseURL= "http://10.195.3.71:8080";    
+   //$rootScope.baseURL= "http://192.168.0.101:8080";    
+   // $rootScope.baseURL= "http://localhost:8080";    
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -50,7 +52,7 @@ cortrollerModule.controller('LoginController', function($scope, $ionicModal, $ti
     $scope.getSupportingRecords('trips');
     $rootScope.hrmin = {
       hstep: [01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24],
-      mstep: [0, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, ]
+      mstep: [0, 01, 02, 03, 04, 05, 06, 07, 08, 09, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59 ]
     };
   }
 

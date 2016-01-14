@@ -25,16 +25,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 })
   .config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
-//      .state('app', {
-//        url: '/app',
-//        //  abstract: true,
-//        views: {
-//          'main': {
-//            templateUrl: 'templates/login.html',
-//            controller: 'BaseController'
-//          }
-//        }
-//      })
+    //      .state('app', {
+    //        url: '/app',
+    //        //  abstract: true,
+    //        views: {
+    //          'main': {
+    //            templateUrl: 'templates/login.html',
+    //            controller: 'BaseController'
+    //          }
+    //        }
+    //      })
 
     .state('login', {
       url: '/login',
@@ -66,26 +66,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     })
 
-    .state('dashboard', {
-      url: '/dashboard',
-      views: {
-        'main': {
-          templateUrl: 'templates/dashboard.html',
-          controller: 'DashboardController'
-        }
-      }
-    })
-    
-    .state('dashboard.triplist', {
-      url: '/triplist',
-      views: {
-        'trip-list': {
-          templateUrl: 'templates/tripList.html'     
-        }
-      }
-    })
-
-
     .state('userinfo', {
       url: '/userinfo',
       views: {
@@ -95,15 +75,44 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-      .state('newtrip', {
-        url: '/newtrip',
+
+    .state('dashboard', {
+      url: '/dashboard',
+      views: {
+        'main': {
+          templateUrl: 'templates/dashboard.html',
+          controller: 'DashboardController'
+        }
+      }
+    })
+      .state('trips', {
+        url: '/trips',
         views: {
           'main': {
-            templateUrl: 'templates/newTrip.html',
-            controller: 'NewTripController'
+            templateUrl: 'templates/trips.html',
+            controller: 'TripsController'
           }
         }
       })
+
+    .state('trips.triplist', {
+      url: '/triplist',
+      views: {
+        'trip-list': {
+          templateUrl: 'templates/tripList.html'
+        }
+      }
+    })
+
+    .state('newtrip', {
+      url: '/newtrip',
+      views: {
+        'main': {
+          templateUrl: 'templates/newTrip.html',
+          controller: 'NewTripController'
+        }
+      }
+    })
       .state('searchtrip', {
         url: '/searchtrip',
         views: {
@@ -113,12 +122,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           }
         }
       })
-    
+
     .state('searchtrip.triplist', {
       url: '/triplist',
       views: {
         'trip-list': {
-          templateUrl: 'templates/tripList.html'     
+          templateUrl: 'templates/tripList.html'
         }
       }
     })
@@ -127,15 +136,78 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/updatetrip',
       views: {
         'main': {
-              templateUrl: 'templates/updateTrip.html',
-              controller: 'UpdateTripController'
-                }
+          templateUrl: 'templates/updateTrip.html',
+          controller: 'UpdateTripController'
+        }
       },
-      params : {
-			'record' : null
-		}
-      
+      params: {
+        'record': null
+      }
+
     })
+
+    .state('vehiclemaintainance', {
+      url: '/vehiclemaintainance',
+      views: {
+        'main': {
+          templateUrl: 'templates/vehiclemaintainance.html',
+          controller: 'VehicleMaintainanceController'
+        }
+      }
+    })
+
+    .state('vehiclemaintainance.maintainancelist', {
+      url: '/maintainancelist',
+      views: {
+        'maintanance-list': {
+          templateUrl: 'templates/maintainancelist.html'
+        }
+      }
+    })
+
+    .state('newmaintainance', {
+      url: '/newmaintainance',
+      views: {
+        'main': {
+          templateUrl: 'templates/newMaintainance.html',
+          controller: 'NewMaintainanceController'
+        }
+      }
+    })
+
+    .state('searchmaintainance', {
+      url: '/searchmaintainance',
+      views: {
+        'main': {
+          templateUrl: 'templates/searchMaintainance.html',
+          controller: 'SearchMaintainanceController'
+        }
+      }
+    })
+
+    .state('searchmaintainance.maintainancelist', {
+      url: '/maintainancelist',
+      views: {
+        'trip-list': {
+          templateUrl: 'templates/maintainancelist.html'
+        }
+      }
+    })
+
+
+    .state('updatemaintainance', {
+      url: '/updatemaintainance',
+      views: {
+        'main': {
+          templateUrl: 'templates/updateMaintainance.html',
+          controller: 'UpdateMaintainanceController'
+        }
+      },
+      params: {
+        'record': null
+      }
+    })
+
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/login');
   });

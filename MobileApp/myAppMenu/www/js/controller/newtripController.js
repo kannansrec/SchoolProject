@@ -4,7 +4,14 @@ cortrollerModule.controller('NewTripController', ['$http', '$scope', '$rootScope
     $scope.formData = {};
     $scope.tempData = {};
     $scope.formData.date = new Date();
-    $scope.options = $rootScope.hrmin;
+  //  $scope.options = $rootScope.hrmin;
+    $scope.hstep = $rootScope.hrmin.hstep;
+    $scope.mstep = $rootScope.hrmin.mstep;
+      //alert($rootScope.hrmin.hstep);
+      //alert($rootScope.hrmin.mstep);
+     // alert($scope.hstep);
+      //alert($scope.mstep);
+      
     $scope.trips = $rootScope.trips;
     $scope.drivers = $rootScope.drivers;
     $scope.vehicles = $rootScope.vehicles;
@@ -15,6 +22,10 @@ cortrollerModule.controller('NewTripController', ['$http', '$scope', '$rootScope
     $scope.createRecord = function(tablename) {
       var tablename = 'trip_details';
       //$scope.formData.total_km = $scope.formData.end_km - $scope.formData.start_km;
+        if($scope.formData.end_km == null || $scope.formData.end_km > $scope.formData.start_km ){
+            if($scope.formData.end_km == null){
+                $scope.formData.total_km = null;                
+            }
       $scope.formData.leaving_time = $scope.tempData.outhr + ':' + $scope.tempData.outmin;
       $scope.formData.date = moment().format('YYYY-MM-DD');
       $http({
@@ -33,6 +44,14 @@ cortrollerModule.controller('NewTripController', ['$http', '$scope', '$rootScope
         .error(function(data) {
           console.log('Error: ' + data);
         });
+    }
+    else{
+        alert("End KM cannot be less than start KM");
+    }
+    };
+      
+       $scope.calculateTotalKm = function(vehicle_no) {
+       $scope.formData.total_km = $scope.formData.end_km - $scope.formData.start_km;
     };
 
     $scope.getVehicleEndKM = function(vehicle_no) {

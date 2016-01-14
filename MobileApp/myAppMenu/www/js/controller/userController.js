@@ -31,12 +31,9 @@ cortrollerModule.controller('UserController', ['$http', '$scope', '$rootScope', 
         });
 
     };
-
-
     $scope.logoutUser = function() {
       $rootScope.loginData = {};
       $state.go("login");
     };
-
   }
 ]);

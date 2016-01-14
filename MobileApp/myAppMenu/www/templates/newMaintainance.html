@@ -2,8 +2,7 @@
   <ion-header-bar align-title="left" class="bar bar-header bar-positive">
     <span class="title font-title">
       <a class="button button-icon button-small icon-right ion-android-arrow-back"
-         ng-click="$ionicGoBack()"></a>New Trip
-<!--        <h1 class="button button-icon icon-left ion-android-bus ">New Trip</h1>-->
+         ng-click="$ionicGoBack()"></a>Maintainance
    </span>
   </ion-header-bar>
   <ion-content padding="true" class="has-header">
@@ -12,9 +11,9 @@
         <div class="input-label static-labels no-padding" style="height:auto;">Vehicle No</div>
         <select id="driver" class="form-control" ng-change="getVehicleEndKM(formData.vehicle_no)" ng-options="value.id as  value.id +'  ('+ value.vehicle_no +')'  for value in vehicles" ng-model="formData.vehicle_no" style="padding-right: 35% !important;"></select>
       </label>
-      <label class="item item-select" name="trip_no">
-        <div class="input-label">Trip No</div>
-        <select class="form-control" ng-options="data.id as data.trip_name for data in trips" ng-model="formData.trip_name" style="padding-right: 35% !important;"></select>
+      <label class="item item-select" name="main_type">
+        <div class="input-label">Maintanance Type</div>
+        <select class="form-control" ng-options="data.value as data.value for data in maintainancetype" ng-model="formData.maintainance_type" style="padding-right: 35% !important;"></select>
       </label>
       <label class="item item-select" name="driver_name">
         <span class="input-label">Driver Name</span>
@@ -36,9 +35,21 @@
         <span class="input-label">Date</span>
         <input type="date" ng-model="formData.date">
       </label>
-
+       <label class="item item-input" name="fuel_quantity">
+        <span class="input-label">Qualtity</span>
+        <input type="number" placeholder="No of Liters"  ng-change="calculateTotalAmount()"  ng-model="formData.fuel_quantity">
+      </label>
+     <label class="item item-input" name="total_km">
+        <span class="input-label">Price Per Liter</span>
+        <input type="number" ng-model="formData.price_per_liter" disabled>
+      </label>
+        <label class="item item-input" name="Amount">
+        <span class="input-label">Amount</span>
+        <input type="number" placeholder="Amount" ng-model="formData.maintainance_amount">
+      </label>
+<!--
       <div class="item item-input-inset">
-        <span class="input-label">OUT Time</span>
+        <span class="input-label"></span>
         <label class="item-input-wrapper">
           <select class="form-control" ng-model="tempData.outhr" ng-options="data for data in hstep"></select>
           <div class="col">Hr</div>
@@ -48,7 +59,9 @@
           <div class="col">Min</div>
         </label>
       </div>
+-->
 
+<!--
       <div class="item item-input-inset">
         <span class="input-label">IN Time</span>
         <label class="item-input-wrapper">
@@ -60,44 +73,11 @@
           <div class="col">Min</div>
         </label>
       </div>
-
-      <!--
-      <label class="item input-wrapper" name="out_time">
-        <span class="input-label">OUT Time</span>
-
-        <div class="row">
-          <div class="col">
-
-            <select class="form-control" ng-model="tempData.outhr" ng-options="data for data in hstep"></select>
-          </div>
-          <div class="col">Hr</div>
-        </div>
-      </label>
-      <label class="item input-wrapper" name="out_time1">
-        <span class="input-label">OUT Time1</span>
-
-        <div class="row">
-          <div class="col">
-
-            <select class="form-control" ng-model="tempData.outmin" ng-options="testdata for testdata in mstep"></select>
-          </div>
-          <div class="col">Min</div>
-        </div>
-      </label>
-      <label class="item item-input" name="in_time">
-        <span class="input-label">IN Time</span>
-        <div class="col">
-          <select class="form-control" ng-model="tempData.inhr" ng-options="data for data in hstep"></select>
-        </div>
-        <div class="col">Hr</div>
-        <div class="col">
-          <select class="form-control" ng-model="tempData.inmin" ng-options="testdata for testdata in mstep"></select>
-        </div>
-        <div class="col">Min</div>
-      </label>
 -->
+
+     
       <button class="button button-full button-balanced icon-left ion-android-done" ng-click="createRecord()">
-        Save Trip
+        Save
       </button>
 
     </div>
